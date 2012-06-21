@@ -61,6 +61,7 @@
 - (id)init {
     if ((self = [super init])) {
         self.barButtonItemClass = [UIBarButtonItem class];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetNavButtons) name:@"ForceResetSideBarButtons" object:nil];
     }
     return self;
 }
@@ -90,6 +91,7 @@
     [super viewDidUnload];
     _tap = nil;
     _pan = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
